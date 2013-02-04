@@ -1,0 +1,27 @@
+@mixin keyframes($animationName) {
+  @-webkit-keyframes $animationName {
+    @content
+  }
+
+  @-moz-keyframes $animationName {
+    @content
+  }
+
+  @-o-keyframes $animationName {
+    @content
+  }
+
+  @keyframes $animationName {
+    @content
+  }
+}
+
+// This mixin generates the prefixed versions for the CSS3 animation method,
+// and sets the fill-mode (defaulting to forwards).
+//
+// MS prefixing is disabled because it breaks some versions of Firefox, and 
+// is not required for any IE browser supporting CSS3 animations
+@mixin animate($animationProperties, $fillMode: 'forwards') {
+  @include experimental(animation, $animationProperties, $ms: false);
+  @include experimental(animation-fill-mode, $fillMode, $ms: false);
+}
