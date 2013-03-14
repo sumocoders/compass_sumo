@@ -1,0 +1,41 @@
+// Fallback mixin. Allows you to define a simple fallback for the current class, with the exact scoping.
+// A small example:
+//   nav ul li {
+//     left: 25px;
+//
+//     @include fallback('ie8') {
+//       left: 28px;
+//     }
+//
+// will generate
+//   nav ul li { left: 25px; }
+//   .ie8 nav ul li { left: 28px; }
+@mixin fallback($fallbackClass) {
+	.#{$fallbackClass} & {
+		@content;
+	}
+}
+
+$defaultSvgFallbackClass: 'no-svg' !default;
+
+// Setup a SVG background with PNG fallback
+@mixin svg-with-png-fallback($name, $backgroundOptions: nulll,
+				    $svgImage: null, 
+				    $pngImage: null,
+				    $fallbackClass: $defaultSvgFallbackClass,
+				    $inline: true
+			    ) {
+
+	$svgImage: "#{$name}.svg" !default;
+	$pngImage: "#{$name}.png" !default;
+
+	@if ($inline) {
+		@include background(inline-image($svgImage) #{$backgroundOptions});
+	} @else {
+		@include background(image-url($svgImage) #{$backgroundOptions});
+	}
+
+	@include fallback($fallbackClass) {
+		@include background(image-url($pngImage) #{$backgroundOptions})
+	}
+}
