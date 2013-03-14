@@ -3,9 +3,9 @@ require 'uri'
 module CompassSumo::SassExtensions::Functions::InlineSvg
   def inline_svg(path)
     data = svg_content(path.value)
-    data = URI.escape(data, '()#') # URL escape breaking characters
-              .split(/[\r\n]+/)    # Get rid of newlines in the URL
-              .join.gsub(/\t/, '') # Get rid of tabs.
+    data = URI.escape(data, '()#'). # URL escape breaking characters
+               split(/[\r\n]+/).    # Get rid of newlines in the URL
+               join.gsub(/\t/, '') # Get rid of tabs.
 
     url = "url('data:image/svg+xml;utf-8,#{data}')"
     Sass::Script::String.new(url)
