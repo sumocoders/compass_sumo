@@ -19,11 +19,12 @@
 $defaultSvgFallbackClass: 'no-svg' !default;
 
 // Setup a SVG background with PNG fallback
-@mixin svg-with-png-fallback($name, $backgroundOptions: nulll,
+@mixin svg-with-png-fallback($name, $backgroundOptions: null,
 				    $svgImage: null, 
 				    $pngImage: null,
 				    $fallbackClass: $defaultSvgFallbackClass,
-				    $inline: true
+				    $inline: true,
+				    $dimensions: true
 			    ) {
 
 	$svgImage: "#{$name}.svg" !default;
@@ -31,6 +32,11 @@ $defaultSvgFallbackClass: 'no-svg' !default;
 
 	@if ($inline) {
 		@include background(inline-image($svgImage) #{$backgroundOptions});
+		background-size: image-width($pngImage) auto;
+		@if ($dimensions) {
+			width: image-width($pngImage);
+			height: image-height($pngImage);
+		}
 	} @else {
 		@include background(image-url($svgImage) #{$backgroundOptions});
 	}
