@@ -33,12 +33,14 @@ $defaultSvgFallbackClass: 'no-svg' !default;
 	@if ($inline) {
 		@include background(inline-image($svgImage) #{$backgroundOptions});
 		background-size: image-width($pngImage) auto;
-		@if ($dimensions) {
-			width: image-width($pngImage);
-			height: image-height($pngImage);
-		}
 	} @else {
 		@include background(image-url($svgImage) #{$backgroundOptions});
+		background-size: image-width($pngImage) auto;
+	}
+	
+	@if ($dimensions) {
+		width: image-width($pngImage);
+		height: image-height($pngImage);
 	}
 
 	@include fallback($fallbackClass) {
