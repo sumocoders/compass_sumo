@@ -17,13 +17,14 @@
 }
 
 $defaultSvgFallbackClass: 'no-svg' !default;
+$defaultInlineSvgs: true !default;
 
 // Setup a SVG background with PNG fallback
 @mixin svg-with-png-fallback($name, $backgroundOptions: null,
 				    $svgImage: null, 
 				    $pngImage: null,
 				    $fallbackClass: $defaultSvgFallbackClass,
-				    $inline: true,
+				    $inline: $defaultInlineSvgs,
 				    $dimensions: true
 			    ) {
 
