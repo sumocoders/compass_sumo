@@ -1,4 +1,4 @@
 module CompassSumo
-  class Engine < Rails::Engin
+  class Engine < Rails::Engine
   end
 end

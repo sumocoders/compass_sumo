@@ -18,5 +18,6 @@ Gem::Specification.new do |s|
   s.version      = CompassSumo::VERSION
 
   s.add_dependency "compass"
+  s.add_dependency "ttfunk"
 end
 
