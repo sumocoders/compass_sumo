@@ -60,6 +60,7 @@ class CompassSumo::SassExtensions::Importers::FontImporter < Sass::Importers::Ba
     font_files_for(uri, options).map do |file|
       {
 	:font_name => TTFunk::File.open(file).name.postscript_name,
+	:font_variable => File.basename(file).gsub('.ttf', ''),
 	:path      => file.gsub(Compass.configuration.fonts_dir + '/', '').gsub('.ttf', ''),
       }
     end
