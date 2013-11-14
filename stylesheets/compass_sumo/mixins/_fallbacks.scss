@@ -19,6 +19,37 @@
 $defaultSvgFallbackClass: 'no-svg' !default;
 $defaultInlineSvgs: true !default;
 
+@mixin generate-svg-background-image(
+    $name,
+    $backgroundOptions: null,
+    $svgImage: null,
+    $pngImage: null,
+    $fallbackClass: $defaultSvgFallbackClass,
+    $inline: $defaultInlineSvgs,
+    $dimensions: true,
+    $hover: false
+    ) {
+  $svgImage: "#{$name}.svg" !default;
+  $pngImage: "#{$name}.png" !default;
+
+  @if ($inline) {
+    @include background(inline-image($svgImage) #{$backgroundOptions});
+    background-size: image-width($pngImage) auto;
+  } @else {
+    @include background(image-url($svgImage) #{$backgroundOptions});
+    background-size: image-width($pngImage) auto;
+  }
+
+  @if ($dimensions) {
+    width: image-width($pngImage);
+    height: image-height($pngImage);
+  }
+
+  @include fallback($fallbackClass) {
+    @include background(image-url($pngImage) #{$backgroundOptions})
+  }
+}
+
 // Setup a SVG background with PNG fallback
 @mixin svg-with-png-fallback($name, $backgroundOptions: null,
 				    $svgImage: null, 
@@ -29,46 +60,25 @@ $defaultInlineSvgs: true !default;
                     $hover: false
 			    ) {
 
-	$svgImage: "#{$name}.svg" !default;
-	$pngImage: "#{$name}.png" !default;
-    $svgImageHover: "#{$name}_hover.svg" !default;
-    $pngImageHover: "#{$name}_hover.png" !default;
+  @include generate-svg-background-image(
+    $name: $name,
+    $backgroundOptions: $backgroundOptions,
+    $fallbackClass: $fallbackClass,
+    $inline: $inline,
+    $dimensions: $dimensions,
+    $hover: $hover
+  );
 
-	@if ($inline) {
-		@include background(inline-image($svgImage) #{$backgroundOptions});
-		background-size: image-width($pngImage) auto;
-	} @else {
-		@include background(image-url($svgImage) #{$backgroundOptions});
-		background-size: image-width($pngImage) auto;
-	}
-	
-	@if ($dimensions) {
-		width: image-width($pngImage);
-		height: image-height($pngImage);
-	}
-
-	@include fallback($fallbackClass) {
-		@include background(image-url($pngImage) #{$backgroundOptions})
-	}
-
-    @if ($hover) {
-      &:hover {
-        @if ($inline) {
-          @include background(inline-image($svgImageHover) #{$backgroundOptions});
-          background-size: image-width($pngImageHover) auto;
-        } @else {
-          @include background(image-url($svgImageHover) #{$backgroundOptions});
-          background-size: image-width($pngImageHover) auto;
-        }
-
-        @if ($dimensions) {
-          width: image-width($pngImageHover);
-          height: image-height($pngImageHover);
-        }
-
-        @include fallback($fallbackClass) {
-          @include background(image-url($pngImageHover) #{$backgroundOptions})
-        }
-      }
+  @if ($hover) {
+    &:hover {
+      @include generate-svg-background-image(
+        "#{$name}_hover",
+        $backgroundOptions: $backgroundOptions,
+        $fallbackClass: $fallbackClass,
+        $inline: $inline,
+        $dimensions: $dimensions,
+        $hover: false
+      );
     }
+  }
 }
