@@ -25,11 +25,14 @@ $defaultInlineSvgs: true !default;
 				    $pngImage: null,
 				    $fallbackClass: $defaultSvgFallbackClass,
 				    $inline: $defaultInlineSvgs,
-				    $dimensions: true
+				    $dimensions: true,
+                    $hover: false
 			    ) {
 
 	$svgImage: "#{$name}.svg" !default;
 	$pngImage: "#{$name}.png" !default;
+    $svgImageHover: "#{$name}_hover.svg" !default;
+    $pngImageHover: "#{$name}_hover.png" !default;
 
 	@if ($inline) {
 		@include background(inline-image($svgImage) #{$backgroundOptions});
@@ -47,4 +50,25 @@ $defaultInlineSvgs: true !default;
 	@include fallback($fallbackClass) {
 		@include background(image-url($pngImage) #{$backgroundOptions})
 	}
+
+    @if ($hover) {
+      &:hover {
+        @if ($inline) {
+          @include background(inline-image($svgImageHover) #{$backgroundOptions});
+          background-size: image-width($pngImageHover) auto;
+        } @else {
+          @include background(image-url($svgImageHover) #{$backgroundOptions});
+          background-size: image-width($pngImageHover) auto;
+        }
+
+        @if ($dimensions) {
+          width: image-width($pngImageHover);
+          height: image-height($pngImageHover);
+        }
+
+        @include fallback($fallbackClass) {
+          @include background(image-url($pngImageHover) #{$backgroundOptions})
+        }
+      }
+    }
 }
