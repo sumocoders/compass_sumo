@@ -21,7 +21,7 @@
 //
 // MS prefixing is disabled because it breaks some versions of Firefox, and 
 // is not required for any IE browser supporting CSS3 animations
-@mixin animate($animationProperties, $fillMode: 'forwards') {
+@mixin animate($animationProperties, $fillMode: forwards) {
   @include experimental(animation, $animationProperties, $ms: false);
   @include experimental(animation-fill-mode, $fillMode, $ms: false);
 }
