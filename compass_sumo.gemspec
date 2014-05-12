@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.name         = 'compass_sumo'
   s.summary      = "SumoCoders CSS Framework"
   s.description  = "The SumoCoders CSS Framework"
-  s.authors      = ["Jan De Poorter", "Niels De Paepe", "Mathias Helin"]
+  s.authors      = ["Jan De Poorter", "Niels De Paepe", "Mathias Helin", "Lisette Mazure"]
   s.email        = "compass@sumocoders.be"
 
   s.files        = `git ls-files`.split("\n")

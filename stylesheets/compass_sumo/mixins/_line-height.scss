@@ -1,0 +1,6 @@
+// Mixin to set line-height to rem with pixel fallback
+// (same use as font-size mixin)
+@mixin line-height($line-height) {
+  line-height: $line-height + px;
+  line-height: ($line-height / 10) + rem;
+}
