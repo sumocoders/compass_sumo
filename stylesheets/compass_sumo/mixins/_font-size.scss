@@ -1,0 +1,6 @@
+// Mixin to set font size to rem with pixel fallback
+// Note: Can be used when body font-size is set to 10px (62.5%)
+@mixin font-size($font-size) {
+  font-size: $font-size + px;
+  font-size: ($font-size / 10) + rem;
+}
