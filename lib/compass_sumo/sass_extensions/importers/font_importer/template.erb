@@ -1,6 +1,6 @@
 <% fonts.each do |font| %>
-  @include load-font("<%= font[:font_name] %>", "<%= font[:path]%>");
+  @include load-font("<%= font[:font_variable] %>", "<%= font[:path]%>");
 
-  $<%= font[:font_variable] %>: <%= font[:font_name] %>;
+  $<%= font[:font_variable] %>: <%= font[:font_variable] %>;
 <% end %>
 
