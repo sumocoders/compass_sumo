@@ -1,5 +1,3 @@
-require 'ttfunk'
-
 # This importer adds a simple way to load fonts like you can import sprites
 #
 # In your .scss file, just add the following line to import all fonts in your font directory
